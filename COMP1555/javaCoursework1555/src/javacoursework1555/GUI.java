@@ -6,12 +6,20 @@
 
 package javacoursework1555;
 
+
+import static java.lang.Double.NEGATIVE_INFINITY;
+import static java.lang.Double.NaN;
+import static java.lang.Double.POSITIVE_INFINITY;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import static javacoursework1555.Functions.F1;
 import static javacoursework1555.Functions.F2;
 import static javacoursework1555.Functions.F3;
 import static javacoursework1555.subMenu.step1;
+
+//import javacoursework1555.Plot2d;
+
 
 
 /**
@@ -30,20 +38,45 @@ public class GUI extends javax.swing.JFrame {
         jPanel3.setVisible(false);
         jPanel4.setVisible(false);
         
-        
-//        x1.add("-1"); x1.add("0.5"); x1.add("0.50001"); x1.add("0.49999");
-//        x2.add("0"); x2.add("-1"); x2.add("-1.0e-10");
-//        x3.add("1.09"); x3.add("1.1"); x3.add("1.11"); 
+//         while(n1 <= sizeX)
+//         {
+//             double a = X.get(n1);
+//             X1[n1] = a;
+//         
+//         }
+//         
+//         while(n2 <= sizeY)
+//         {
+//             double b = X.get(n2);
+//             Y1[n2] = b;
+//         }
+    
+
+
+            
+
     }
 
     ArrayList<Double> Temp = new ArrayList<Double>();
+    ArrayList<ArrayList<Double>> XY = new ArrayList<ArrayList<Double>>();
    
-//    ArrayList<String> x1 = new ArrayList<String>();
-//    ArrayList<String> x2 = new ArrayList<String>();
-//    ArrayList<String> x3 = new ArrayList<String>();
+    ArrayList<Double> X = new ArrayList<Double>();
+//    double [] X1;
+//    int sizeX = X.size();
+//    int n1 = 0;
+    
+   
     
     
+    ArrayList<Double> Y = new ArrayList<Double>();
+//    double [] Y1;
+//    int sizeY = Y.size();
+//    int n2 = 0;
+//    
+    
    
+    
+    
     
     
     /** This method is called from within the constructor to
@@ -400,6 +433,12 @@ public class GUI extends javax.swing.JFrame {
 
     
     
+    
+    
+    
+    
+    /// GRAPH PART
+    
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -434,7 +473,7 @@ public class GUI extends javax.swing.JFrame {
             {   
                 Temp.add(0, d1);   
                 Temp.add(1, d2); 
-                System.out.println(Temp.get(0) +" "+ Temp.get(1));
+                System.out.println("range: for x:" + Temp.get(0) +" to x: "+ Temp.get(1));
             }
                     
         } catch(Exception e)
@@ -450,7 +489,7 @@ public class GUI extends javax.swing.JFrame {
     
     
     
-    
+    ///graph - f(x) = x-x^2
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
          
@@ -463,11 +502,28 @@ public class GUI extends javax.swing.JFrame {
               
 
         step1( k, k1, k2);  
-        System.out.println(step1( k, k1, k2));
+        //System.out.println("print of step1() in GUI for f(x)=x-x^2   "+step1( k, k1, k2));
+        XY = (step1(k, k1, k2));
+        //System.out.println("print of XY list in GUI wich should be similar to step1() button selected f(x)=x-x^2  "+XY);
+        X = XY.get(0);
+        System.out.println("print of X list which should be similar to step1() first part button selected f(x)=x-x^2   "+X);
+        Y = XY.get(1);
+        System.out.println("print of Y list which should be similar to step1() first part button selected f(x)=x-x^2  "+Y);
         
+        double minimumY = minY();
+        System.out.println("min for f(x)=x-x^2 : "+minimumY);
+        
+        double maximumY = maxY();
+        System.out.println("max for f(x)=x-x^2 : "+maximumY);
+        
+        
+        
+       //Plot2d T1 = new Plot2d(X1, Y1);
        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    ///graph - f(x) = ln(x+1)+ 1
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         
@@ -479,10 +535,81 @@ public class GUI extends javax.swing.JFrame {
       //System.out.println(k1 +" "+ k2);
               
       step1( k, k1, k2);
-      System.out.println(step1( k, k1, k2));
+      //System.out.println("print of step1() in GUI for f(x)=ln(x+1)+1   "+ step1( k, k1, k2));
+      XY = (step1(k, k1, k2));
+      //System.out.println("print of XY list in GUI wich should be similar to step1() button selected f(x)=ln(x+1)+1  "+XY);
+      X = XY.get(0);
+      System.out.println("print of X list which should be similar to step1() first part button selected f(x)=ln(x+1)+1   "+ X);
+      Y = XY.get(1);
+      System.out.println("print of Y list which should be similar to step1() first part button selected f(x)=ln(x+1)+1  "+Y);
+      
         
+        double minimumY;
+        double maximumY;
+        
+        double Ninfinite = Y.indexOf(NEGATIVE_INFINITY);//  value of infinity in Y for -infinty
+        double Pinfinite = Y.indexOf(POSITIVE_INFINITY);//  value of infinity in Y for +infinty
+        
+        minimumY = minY();
+        System.out.println("min: "+minimumY);
+        maximumY = maxY();
+        System.out.println("max: "+maximumY);
+        
+        
+        
+//        if (Y.contains(NEGATIVE_INFINITY))
+//        {
+//        
+//            System.out.println("min for f(x)=ln(x+1)+1 : "+NEGATIVE_INFINITY+"in X = "+X.get((int)Ninfinite));
+//            minimumY = NEGATIVE_INFINITY;
+//            maximumY = maxY();
+//            System.out.println("max for f(x)=ln(x+1)+1 : "+maximumY);
+//            
+//        }else if (Y.contains(POSITIVE_INFINITY))
+//        {
+//        
+//            System.out.println("max for f(x)=ln(x+1)+1 : "+POSITIVE_INFINITY+"in X = "+X.get((int)Pinfinite));
+//            maximumY = POSITIVE_INFINITY;
+//            minimumY = minY();
+//            System.out.println("min for f(x)=ln(x+1)+1 : "+minimumY);
+//        
+//        }else if(Y.contains(NEGATIVE_INFINITY) || Y.contains(POSITIVE_INFINITY))
+//        {
+//        
+//            System.out.println("min for f(x)=ln(x+1)+1 : "+NEGATIVE_INFINITY+"in X = "+Y.get((int)Ninfinite));
+//            minimumY = NEGATIVE_INFINITY;
+//            System.out.println("max for f(x)=ln(x+1)+1 : "+POSITIVE_INFINITY+"in X = "+Y.get((int)Pinfinite));
+//            maximumY = POSITIVE_INFINITY;
+//            
+//        }else
+//        {
+//        
+//            minimumY = minY();
+//            System.out.println("min for f(x)=ln(x+1)+1 : "+minimumY);
+//            
+//            maximumY = maxY();
+//            System.out.println("max for f(x)=ln(x+1)+1 : "+maximumY);
+//        
+//        }
+
+        
+
+        
+        
+        /*System.out.println(" X value of -Infinity: "+Ninfinite);
+        System.out.println("Y value for Ninfinite: "+Y.get((int) Ninfinite));
+        System.out.println(" X value of +Infinity: "+Pinfinite);*/
+        
+        
+
+      
+      
+      //Plot2d T1 = new Plot2d(X1, Y1);
+      
+       
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    ///graph - f(x) = e^x-3x
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
@@ -493,10 +620,41 @@ public class GUI extends javax.swing.JFrame {
               
         //System.out.println(k1 +" "+ k2);
         step1( k, k1, k2);
-        System.out.println(step1( k, k1, k2));
+        //System.out.println("print of step1() in GUI for f(x)=e^x-3x   "+ step1( k, k1, k2));
+        XY = (step1(k, k1, k2));
+        //System.out.println("print of XY list in GUI wich should be similar to step1() button selected f(x)=e^x-3  "+XY);
+        X = XY.get(0);
+        System.out.println("print of X list which should be similar to step1() first part button selected f(x)=e^x-3   "+ X);
+        Y = XY.get(1);
+        System.out.println("print of Y list which should be similar to step1() first part button selected f(x)=e^x-3  "+ Y);
+        
+        //Plot2d T1 = new Plot2d(X1, Y1);
+        
+        double minimumY = minY();
+        System.out.println("min for f(x)=e^x-3 : "+minimumY);
+        
+        double maximumY = maxY();
+        System.out.println("max for f(x)=e^x-3 : "+maximumY);      
+
+        
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    
+    
+   
+    
+    
+/////////////////////////////////////////////////////////////////////////////////    
+    
+    
+    
+    
+    
+    
+    
+    ////RESULT PART
+    
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -509,8 +667,7 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
-    
-    
+ 
     
     ///result - f(x) = x-x^2 <- combobox1 is where the x asked are located
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -575,7 +732,7 @@ public class GUI extends javax.swing.JFrame {
             
         } else if (n == 2)
         {
-            
+                            /// -1.0e-10
             Double a = F1(-12.7182818285);
             System.out.println(a);
             jTextField4.setText(decimalNumb(a, Ndeci));
@@ -761,5 +918,132 @@ public class GUI extends javax.swing.JFrame {
         
         
     }
+    
+    
+    private double minY()
+    {
+        
+        double tryout1 = Y.get(0);
+        int tryout3 = 0;
+        int RsizeY = 0;
+        int sizeY = Y.size();
+        
+       
+        
+        boolean barnabe = true ;
+        while(barnabe == true)
+         {
+             //System.out.println(RsizeY);
+             //System.out.println(sizeY);
+             
+             if(RsizeY == sizeY)
+             
+                  {
+                      //System.out.println("min list Y in GUI button f(x)=x-x^2  suposidly found");
+                      return tryout1;
+                  } 
+             
+                     if (Y.contains(NEGATIVE_INFINITY))
+                     {               
+        
+                         tryout1 = NEGATIVE_INFINITY;
+                         
+                         return tryout1;
+                         
+                     }
+             
+                             
+                 if(tryout1 >= Y.get(tryout3) || Y.get(tryout3) != NaN)
+                 {  
+                     tryout1 = Y.get(tryout3);
+                 
+                     
+                
+                 //System.out.println("pass by here print "+ tryout1);
+                 //tryout3++;
+                 } 
+                 
+                 tryout3++;
+                 RsizeY++;
+                 
+             
+              
+             
+             
+               
+//             System.out.println("tryout3: "+tryout3);
+//             System.out.println("Rsize: "+RsizeY);
+//             System.out.println("value in Y of tryout3: "+Y.get(tryout3));
+              
+            
+        
+         }
+        //System.out.println(sizeY);
+        System.out.println(tryout1);
+        return tryout1;
+    
+    
+    }
+    
+        private double maxY()
+    {
+        
+        double tryout1 = Y.get(0);
+        int tryout3 = 0;
+        int RsizeY = 0;
+        int sizeY = Y.size();
+        
+       
+        
+        boolean barnabe = true ;
+        while(barnabe == true)
+         {
+             //System.out.println(RsizeY);
+             //System.out.println(sizeY);
+             
+             if(RsizeY == sizeY)
+             
+                  {
+                      //System.out.println("max list Y in GUI button f(x)=x-x^2  suposidly found");
+                      return tryout1;
+                  } 
+             
+             
+             
+             if (Y.contains(POSITIVE_INFINITY))   
+             {
+                 tryout1 = POSITIVE_INFINITY;
+                 return tryout1;
+             }
+             
+             
+             
+             if(tryout1 <= Y.get(tryout3) || Y.get(tryout3) != NaN)
+         
+             {
+                 tryout1 = Y.get(tryout3);
+                 
+                 
+             
+                
+                 //System.out.println("pass by here print "+ tryout1);
+                 //tryout3++;
+                  
+             }
+             
+             tryout3++;
+             RsizeY++; 
+              
+            
+        
+         }
+        return tryout1;
+    
+    
+    }
 
+    
+    
+    
+    
 }

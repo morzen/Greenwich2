@@ -118,7 +118,7 @@ public class Functions
     
    
 
-    private static double ln(double a) 
+    static double ln(double a) 
     {
         //System.out.println("2 " + a);
         a = Math.log(a);
@@ -128,7 +128,7 @@ public class Functions
     }
     
 
-    private static double expo(double i)
+    static double expo(double i)
     {
     
         i = Math.exp(i);
@@ -146,6 +146,8 @@ public class Functions
 //        return a;
 //    }
 
+    
+    
     
     
     
