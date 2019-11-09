@@ -544,15 +544,12 @@ public class GUI extends javax.swing.JFrame {
       System.out.println("print of Y list which should be similar to step1() first part button selected f(x)=ln(x+1)+1  "+Y);
       
         
-        double minimumY;
-        double maximumY;
+        //double Ninfinite = Y.indexOf(NEGATIVE_INFINITY);//  value of infinity in Y for -infinty
+        //double Pinfinite = Y.indexOf(POSITIVE_INFINITY);//  value of infinity in Y for +infinty
         
-        double Ninfinite = Y.indexOf(NEGATIVE_INFINITY);//  value of infinity in Y for -infinty
-        double Pinfinite = Y.indexOf(POSITIVE_INFINITY);//  value of infinity in Y for +infinty
-        
-        minimumY = minY();
+        double minimumY = minY();
         System.out.println("min: "+minimumY);
-        maximumY = maxY();
+        double maximumY = maxY();
         System.out.println("max: "+maximumY);
         
         
@@ -969,11 +966,7 @@ public class GUI extends javax.swing.JFrame {
              
               
              
-             
-               
-//             System.out.println("tryout3: "+tryout3);
-//             System.out.println("Rsize: "+RsizeY);
-//             System.out.println("value in Y of tryout3: "+Y.get(tryout3));
+
               
             
         
