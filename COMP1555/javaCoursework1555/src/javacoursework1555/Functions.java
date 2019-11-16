@@ -81,7 +81,7 @@ public class Functions
     static double F3(double a)
     {
     
-        a = expo(a - 3*a);
+        a = expo(a) - 3*a;
         return a;
         
     }
@@ -91,7 +91,7 @@ public class Functions
     static double F3derive(double a)
     {
     
-        a = expo(a - 3*a);
+        a = expo(a) - 3;
         return a;
         
     }

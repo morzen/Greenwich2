@@ -12,10 +12,23 @@ import static java.lang.Double.NaN;
 import static java.lang.Double.POSITIVE_INFINITY;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import static javacoursework1555.Functions.F1;
 import static javacoursework1555.Functions.F2;
 import static javacoursework1555.Functions.F3;
+import static javacoursework1555.rootFinder.Bisection1;
+import static javacoursework1555.rootFinder.Bisection2;
+import static javacoursework1555.rootFinder.Bisection3;
+import static javacoursework1555.rootFinder.MyWay;
+import static javacoursework1555.rootFinder.MyWay2;
+import static javacoursework1555.rootFinder.NR1;
+import static javacoursework1555.rootFinder.NR2;
+import static javacoursework1555.rootFinder.NR3;
+import static javacoursework1555.rootFinder.Secant1;
+import static javacoursework1555.rootFinder.Secant2;
+import static javacoursework1555.rootFinder.Secant3;
 import static javacoursework1555.subMenu.step1;
 
 //import javacoursework1555.Plot2d;
@@ -32,11 +45,21 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         
+        //graph
+        //int functionChoosen = 0;
+        
        
         
         jPanel2.setVisible(false);
         jPanel3.setVisible(false);
         jPanel4.setVisible(false);
+        jPanel5.setVisible(false);
+        
+        
+        jTextField3.setEditable(false);
+        jTextField4.setEditable(false);
+        jTextField5.setEditable(false);
+        jTextField6.setEditable(false);
         
 //         while(n1 <= sizeX)
 //         {
@@ -58,6 +81,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     ArrayList<Double> Temp = new ArrayList<Double>();
+    
     ArrayList<ArrayList<Double>> XY = new ArrayList<ArrayList<Double>>();
    
     ArrayList<Double> X = new ArrayList<Double>();
@@ -66,8 +90,6 @@ public class GUI extends javax.swing.JFrame {
 //    int n1 = 0;
     
    
-    
-    
     ArrayList<Double> Y = new ArrayList<Double>();
 //    double [] Y1;
 //    int sizeY = Y.size();
@@ -75,6 +97,8 @@ public class GUI extends javax.swing.JFrame {
 //    
     
    
+    // used for roots
+    int[] FunctionChoosen = {0};
     
     
     
@@ -111,6 +135,16 @@ public class GUI extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jButton10 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("frame0");
@@ -212,7 +246,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,36 +328,70 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("choose your x : ");
+
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "f(x)= x-x^2 ", "f(x)= ln(x+1)+1", "f(x)= e^x-3x"}));
+
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
+        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField7ActionPerformed(evt);
+            }
+        });
+
+        jButton10.setText("ok");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButton7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 35, Short.MAX_VALUE)
+                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField3)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField6)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,7 +414,74 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jButton11.setText("Newton's Raphson");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setText("Secant");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setText("Bisection");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jButton14.setText("MyWay");
+        jButton14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton14ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton14)
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jButton11)
+                        .addGap(109, 109, 109))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jButton11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton14)
+                    .addComponent(jButton13)
+                    .addComponent(jButton12))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -356,35 +491,45 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                 .addGap(140, 140, 140)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(144, 144, 144))
+                .addGap(171, 171, 171))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -398,10 +543,10 @@ public class GUI extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -413,6 +558,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel2.setVisible(false);
         jPanel3.setVisible(false);
         jPanel4.setVisible(true);
+        jPanel5.setVisible(false);
         
            
         
@@ -492,13 +638,18 @@ public class GUI extends javax.swing.JFrame {
     ///graph - f(x) = x-x^2
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        System.out.println(" graph - f(x)= x-x^2");
+        
+        jPanel5.setVisible(true);
          
         int k = 1; 
+        
+        FunctionChoosen[0] = k;
               
         double k1 = Temp.get(0);  
         double k2 = Temp.get(1);
               
-        //System.out.println(k1 +" "+ k2);
+        System.out.println(k1 +" "+ k2);
               
 
         step1( k, k1, k2);  
@@ -527,7 +678,11 @@ public class GUI extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         
+      jPanel5.setVisible(true);
+        
       int k = 2; 
+      
+      FunctionChoosen[0] = k;
               
       double k1 = Temp.get(0);
       double k2 = Temp.get(1);
@@ -610,7 +765,14 @@ public class GUI extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         
-        int k = 3; 
+       
+        
+        
+        jPanel5.setVisible(true);
+        
+        int k = 3;
+        
+        FunctionChoosen[0] = k;
         
         double k1 = Temp.get(0);
         double k2 = Temp.get(1);
@@ -637,6 +799,20 @@ public class GUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
+   
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
    
@@ -717,20 +893,20 @@ public class GUI extends javax.swing.JFrame {
         
         if(n == 0)
         {
-            Double  a = F1(0.0);
+            Double  a = F2(0.0);
             System.out.println(a);
             jTextField4.setText(decimalNumb(a, Ndeci));
             
         } else if(n == 1)
         {
-            Double a = F1(-1.0);
+            Double a = F2(-1.0);
             System.out.println(a);
             jTextField4.setText(decimalNumb(a, Ndeci));
             
         } else if (n == 2)
         {
                             /// -1.0e-10
-            Double a = F1(-12.7182818285);
+            Double a = F2(-12.7182818285);
             System.out.println(a);
             jTextField4.setText(decimalNumb(a, Ndeci));
             
@@ -746,25 +922,28 @@ public class GUI extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         
+        // x choosen 
         int n = (int) jComboBox3.getSelectedIndex();
+        
+        //number of decimal 
         int Ndeci = (int) jComboBox4.getSelectedIndex();
         //System.out.println(n);
         
         if(n == 0)
         {
-            Double  a = F1(1.09);
+            Double  a = F3(1.09);
             System.out.println(a);
             jTextField5.setText(decimalNumb(a, Ndeci));
             
         } else if(n == 1)
         {
-            Double a = F1(1.1);
+            Double a = F3(1.1);
             System.out.println(a);
             jTextField5.setText(decimalNumb(a, Ndeci));
             
         } else if (n == 2)
         {
-            Double a = F1(1.11);
+            Double a = F3(1.11);
             System.out.println(a);
             jTextField5.setText(decimalNumb(a, Ndeci));
             
@@ -788,11 +967,236 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    
+    
+    
+    
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
+    
+    
+    
+    // X user input part
+    
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        
+        // function choosen 
+        int ntry = (int) jComboBox5.getSelectedIndex();
+        // number of decimal 
+        int Ndeci = (int) jComboBox4.getSelectedIndex();
+        
+        boolean trial = false;
+        double caca=0.0;
+        
+        
+        
+        
+            
+            try
+            {
+                
+                String SXchoosen = jTextField7.getText(); 
+                double Xchoosen = Double.parseDouble(SXchoosen);
+                caca = Xchoosen;
+                
+                
+            }
+            catch(Exception e)
+            {
+                //jTextField6.setText(" enter a numerical value ");
+                ntry = 4;
+                
+            }
+        
+        
+         
+        System.out.println(ntry);
+        
+        if(ntry == 0)
+        {
+            
+            double YofCx = F1(caca);
+            System.out.println("resulta f1: "+caca);
+            
+            jTextField6.setText(decimalNumb(YofCx, Ndeci));
+            
+            
+        }else if(ntry == 1)
+        {
+           
+            
+            double YofCx = F2(caca);
+            System.out.println("resulta f2: "+caca);
+            
+            jTextField6.setText(decimalNumb(YofCx, Ndeci));
+            
+        }else if(ntry == 2)
+        {
+          
+            
+            double YofCx = F3(caca); 
+            System.out.println("resulta f3: "+caca);
+            
+            jTextField6.setText(decimalNumb(YofCx, Ndeci));
+            
+        }else
+        {
+            System.out.println(" problem at result user input part in gui file ");
+            jTextField6.setText(" enter a numerical value ");
+        }
+        
+        
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField7ActionPerformed
+
+    
+    
+    
+    
+/////////////////////////////////////////////////////////////////////////////////
+    
+    
+    //ROOT PART THO DEPEND OF THE GRAPH PART 
+    
+    
+/////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    //NR
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        
+        if(FunctionChoosen[0] == 1)
+        {
+            double root1 = NR1(Temp.get(0), Temp.get(1));
+             System.out.println("NR1 root1: "+root1);
+            
+        }else if (FunctionChoosen[0] == 2)
+        {
+            double root2 = NR2(Temp.get(0), Temp.get(1));
+             System.out.println("NR2 root2: "+root2);
+            
+        }else if (FunctionChoosen[0] == 3)
+        {
+            double root3 = NR3(Temp.get(0), Temp.get(1));
+             System.out.println("N3 root3: "+root3);
+            
+        }else
+        {
+            System.out.println(" NR problem in root part ");
+        }
+        
+        
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    //SECANT
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+        
+        if(FunctionChoosen[0] == 1)
+        {
+            double root1 = Secant1(Temp.get(0), Temp.get(1));
+             System.out.println("Secant1 root1: "+root1);
+            
+        }else if (FunctionChoosen[0] == 2)
+        {
+            double root2 = Secant2(Temp.get(0), Temp.get(1));
+             System.out.println("Secant2 root2: "+root2);
+            
+        }else if (FunctionChoosen[0] == 3)
+        {
+            double root3 = Secant3(Temp.get(0), Temp.get(1));
+             System.out.println("Secant3 root3: "+root3);
+            
+        }else
+        {
+            System.out.println(" Secant problem in root part ");
+        }
+        
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    //BISECTION
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        
+        if(FunctionChoosen[0] == 1)
+        {
+            double[] root1 = Bisection1(Temp.get(0), Temp.get(1));
+             System.out.println("Bisection1 root1: "+Arrays.toString(root1));
+            
+        }else if (FunctionChoosen[0] == 2)
+        {
+            double[] root2 = Bisection2(Temp.get(0), Temp.get(1));
+             System.out.println("Bisection2 root2: "+Arrays.toString(root2));
+            
+        }else if (FunctionChoosen[0] == 3)
+        {
+            double[] root3 = Bisection3(Temp.get(0), Temp.get(1));
+             System.out.println("Bisection3 root3: "+Arrays.toString(root3));
+            
+        }else
+        {
+            System.out.println(" Bisection problem in root part ");
+        }
+        
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    //MY WAY
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        // TODO add your handling code here:
+        
+        if(FunctionChoosen[0] == 1)
+        {    // would zork but don't use linked likst qnd work only for square function
+            //double root1 = MyWay(-1, 1, 0);
+            LinkedList<Double> root1 = MyWay2(Temp.get(0), Temp.get(1), 1);
+            System.out.println("MyWay2 root1"+root1);
+            
+        }else if (FunctionChoosen[0] == 2)
+        {
+            LinkedList<Double> root2 = MyWay2(Temp.get(0), Temp.get(1), 2);
+             System.out.println("MyWay2 root2"+root2);
+            
+        }else if (FunctionChoosen[0] == 3)
+        {
+            LinkedList<Double> root3 = MyWay2(Temp.get(0), Temp.get(1), 3);
+             System.out.println("MyWay2 root3"+root3);
+            
+        }else
+        {
+            System.out.println(" MyWay problem in root part ");
+        }
+        
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    
+    
+    
+    
+///////////////////////////////////////////////////////////////////////////////// 
+    
+    
+    
+/////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+   
     
   
     
@@ -841,6 +1245,11 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -853,16 +1262,21 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 
     private String decimalNumb(Double i, int f) 
@@ -933,52 +1347,50 @@ public class GUI extends javax.swing.JFrame {
              //System.out.println(RsizeY);
              //System.out.println(sizeY);
              
-             if(RsizeY == sizeY)
+             if(RsizeY == sizeY)  
+             {
+               //System.out.println("min list Y in GUI button f(x)=x-x^2  suposidly found");
+                 return tryout1; 
+             } 
              
-                  {
-                      //System.out.println("min list Y in GUI button f(x)=x-x^2  suposidly found");
-                      return tryout1;
-                  } 
-             
-                     if (Y.contains(NEGATIVE_INFINITY))
-                     {               
-        
-                         tryout1 = NEGATIVE_INFINITY;
-                         
-                         return tryout1;
-                         
-                     }
+             if (Y.contains(NEGATIVE_INFINITY))
+              {  
+                  tryout1 = NEGATIVE_INFINITY;
+                  return tryout1;     
+              }
              
                              
-                 if(tryout1 >= Y.get(tryout3) || Y.get(tryout3) != NaN)
-                 {  
-                     tryout1 = Y.get(tryout3);
                  
-                     
-                
+             if(tryout1 >= Y.get(tryout3) && Y.get(tryout3) != NaN) 
+             {  
+                 //System.out.println("tryout1: "+ tryout1 +" >= "+ Y.get(tryout3));
+             
+                 tryout1 = Y.get(tryout3);
                  //System.out.println("pass by here print "+ tryout1);
                  //tryout3++;
-                 } 
                  
-                 tryout3++;
-                 RsizeY++;
+             } 
+             
+             tryout3++;   
+             RsizeY++;
                  
              
-              
-             
-
-              
-            
-        
          }
-        //System.out.println(sizeY);
-        System.out.println(tryout1);
+        
+        //System.out.println("sizeY: "+sizeY);
+        //System.out.println("tryout1: "+tryout1);
         return tryout1;
     
     
     }
     
-        private double maxY()
+    
+    
+    
+    
+    
+        
+    private double maxY()
     {
         
         double tryout1 = Y.get(0);
@@ -986,54 +1398,154 @@ public class GUI extends javax.swing.JFrame {
         int RsizeY = 0;
         int sizeY = Y.size();
         
+        int i = 0;
+        
+        
        
         
         boolean barnabe = true ;
         while(barnabe == true)
          {
-             //System.out.println(RsizeY);
-             //System.out.println(sizeY);
+             //System.out.println("RsizeY: "+RsizeY);
+             //System.out.println("sizeY: "+sizeY);
              
-             if(RsizeY == sizeY)
-             
-                  {
-                      //System.out.println("max list Y in GUI button f(x)=x-x^2  suposidly found");
-                      return tryout1;
-                  } 
+             //System.out.println("tryout1= "+tryout1);
              
              
+
              
-             if (Y.contains(POSITIVE_INFINITY))   
+             
+             if(RsizeY == sizeY)  
              {
-                 tryout1 = POSITIVE_INFINITY;
-                 return tryout1;
-             }
+               //System.out.println("min list Y in GUI button f(x)=x-x^2  suposidly found");
+                 return tryout1; 
+             } 
              
+             else if (Y.contains(POSITIVE_INFINITY))
+              {  
+                  tryout1 = POSITIVE_INFINITY;
+                  return tryout1;     
+              }
              
+                             
+                 
+             else if(tryout1 <= Y.get(tryout3) && Y.get(tryout3) != NaN) 
+             {  
+                 //System.out.println("tryout1: "+ tryout1 +" >= "+ Y.get(tryout3));
              
-             if(tryout1 <= Y.get(tryout3) || Y.get(tryout3) != NaN)
-         
-             {
                  tryout1 = Y.get(tryout3);
-                 
-                 
-             
-                
                  //System.out.println("pass by here print "+ tryout1);
                  //tryout3++;
-                  
+                 
+             }else 
+             {
+                 //System.out.println("went throught the else");
+                 
+                 while(Double.isNaN(tryout1))
+                 { 
+                     //System.out.println("went here");
+                     
+                     tryout1 = Y.get(i);
+                     i++;
+                 }
+                 //System.out.println("tryout1= "+tryout1);
+                 
+                 
+             
              }
              
-             tryout3++;
-             RsizeY++; 
-              
-            
-        
+             tryout3++;   
+             RsizeY++;
+                 
+             
          }
+        
+        //System.out.println("sizeY: "+sizeY);
+        //System.out.println("tryout1: "+tryout1);
         return tryout1;
     
     
     }
+    
+    
+    
+    
+    
+    
+        
+//    private double maxY()
+//    {
+//        
+//        double tryout1 = Y.get(0);
+//        int tryout3 = 0;
+//        int RsizeY = 0;
+//        int sizeY = Y.size();
+//        
+//       
+//        
+//        boolean barnabe = true ;
+//        while(barnabe == true)
+//         {
+//             //System.out.println(RsizeY);
+//             //System.out.println(sizeY);
+//             
+//                          if (Y.contains(POSITIVE_INFINITY))   
+//             {
+//                 tryout1 = POSITIVE_INFINITY;
+//                 System.out.println("second return ");
+//                 return tryout1;
+//             }
+//             
+//             while(Y.get(tryout3) == NaN)   
+//             {
+//                 System.out.println("went here");
+//                 tryout3++;
+//             }
+//             
+//             
+//             
+//             
+//             
+//             if(Y.get(tryout3) != NaN)
+//             {
+//                 if(tryout1 <= Y.get(tryout3))
+//                 {
+//                     System.out.println("tryout1: "+ tryout1 +" <= "+ Y.get(tryout3));
+//                     tryout1 = Y.get(tryout3);
+//                 
+//                    //System.out.println("pass by here print "+ tryout1);
+//                    //tryout3++;
+//                 }
+//             }
+//             
+//             
+//             
+//             
+//             if(RsizeY == sizeY)
+//             
+//                  {
+//                      //System.out.println("max list Y in GUI button f(x)=x-x^2  suposidly found");
+//                      System.out.println("first return ");
+//                      return tryout1;
+//                  } 
+//             
+//             
+//             
+//
+//             
+//             
+//             tryout3++;
+//             RsizeY++; 
+//              
+//            
+//        
+//         }
+//        
+//        System.out.println("third return ");
+//        return tryout1;
+//    
+//    
+//    }
 
     
     

@@ -11,8 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import static javacoursework1555.Functions.F1;
+import static javacoursework1555.Functions.F1derive;
 import static javacoursework1555.Functions.F2;
+import static javacoursework1555.Functions.F2derive;
 import static javacoursework1555.Functions.F3;
+import static javacoursework1555.Functions.F3derive;
 
 /**
  *
@@ -27,27 +30,192 @@ public class rootFinder {
     
     public static void main(String[] args) 
     {
+        //Newton Raphson method
         
+        //System.out.println(NR1(1, 2));
+        //System.out.println(NR2(1, 2));
+        //System.out.println(NR3(1, 2));
     
         // Secant
-        //System.out.println(Secant1(4.0, 9.0));
+        //System.out.println(Secant1(-2.0, -1.0));
         
         //System.out.println(Secant2(4.0, 9.0));
         
         //System.out.println(Secant3(4.0, 9.0));
         
         // Bisection
-        //System.out.println(Bisection1(0.1, 0.9));
+        
+        //System.out.println(Arrays.toString(Bisection1(-4.0, 8.0)));  //-4.33, 8.67
+        
+        //System.out.println(Arrays.toString(Bisection2(-1.78, 3.763)));
+        
+        //System.out.println(Arrays.toString(Bisection3(-1.78, 3.763)));
         
         
         
         //MyWay
         //System.out.println(MyWay(-1.0, 1.0, 0));
-        System.out.println("the roots are: "+MyWay2(-10.0, 10.0, 3));
+        //System.out.println("the roots are: "+MyWay2(-10.0, 10.0, 3));
         
     
     }
     
+
+/////////////////////////////////////////////////////////////////////////////////  
+    
+    
+    
+    
+    //NEWTON'S RAPHSON METHOD
+    
+    
+    
+    
+/////////////////////////////////////////////////////////////////////////////////
+
+
+static double NR1(double x1, double x4)
+{
+    LinkedList<Double> results1 = new LinkedList<Double>();
+    
+    
+    if(x1 < x4)
+    {
+        boolean exit = false;
+        
+        while(exit != true)
+        {
+            double x2 = x1 - (F1(x1)/F1derive(x1));
+            String sx2 = df3.format(x2);
+            x2 = Double.parseDouble(sx2);
+            results1.add(x2);
+            
+            if(x2 == x1)
+            {
+                //System.out.println("root: "+ x2);
+                return x2;
+                //exit = true;
+            }
+            
+            
+            x1 = x2;
+            
+            
+        }
+        
+        
+        
+        //System.out.print(results1);
+        
+        
+    }else
+    {
+        System.out.println(" the intervale input is wrong ");
+    }
+    
+    return x1;
+}
+
+
+static double NR2(double x1, double x4)
+{
+    LinkedList<Double> results1 = new LinkedList<Double>();
+    
+    
+    if(x1 < x4)
+    {
+        boolean exit = false;
+        
+        while(exit != true)
+        {
+            double x2 = x1 - (F2(x1)/F2derive(x1));
+            String sx2 = df3.format(x2);
+            x2 = Double.parseDouble(sx2);
+            results1.add(x2);
+            
+            if(x2 == x1)
+            {
+                //System.out.println("root: "+ x2);
+                return x2;
+                //exit = true;
+            }
+            
+            
+            x1 = x2;
+            
+            
+        }
+        
+        
+        
+        //System.out.print(results1);
+        
+        
+    }else
+    {
+        System.out.println(" the intervale input is wrong ");
+    }
+    
+    return x1;
+}
+
+
+
+
+static double NR3(double x1, double x4)
+{
+    LinkedList<Double> results1 = new LinkedList<Double>();
+    
+    
+    if(x1 < x4)
+    {
+        boolean exit = false;
+        
+        while(exit != true)
+        {
+            double x2 = x1 - (F3(x1)/F3derive(x1));
+            String sx2 = df3.format(x2);
+            x2 = Double.parseDouble(sx2);
+            results1.add(x2);
+            
+            if(x2 == x1)
+            {
+                //System.out.println("root: "+ x2);
+                return x2;
+                //exit = true;
+            }
+            
+            
+            x1 = x2;
+            
+            
+        }
+        
+        
+        
+        //System.out.print(results1);
+        
+        
+    }else
+    {
+        System.out.println(" the intervale input is wrong ");
+    }
+    
+    return x1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
     
  
 /////////////////////////////////////////////////////////////////////////////////  
@@ -68,6 +236,8 @@ public class rootFinder {
         
         double[] listSecant1 = {x1 , x2};
         
+        //System.out.println("first x1: "+x1);
+        //System.out.println("first x2: "+x2);
         
         
         
@@ -75,9 +245,10 @@ public class rootFinder {
         
         while(x1 != x2)
         {
-            
-            
-           double x3 = (F1(x2) / ( (F1(x2) - F1(x1)) / (x2 - x1) ) );
+                  // secant method formula
+                 // x1 = xn-z // x2 = xn // x3 = xn+1
+                //xn+1 = xn - (f(xn)   /[  f(xn)  -  f(xn-1) / xn-xn-1])
+           double x3 = ( x2 - (F1(x2) / ( (F1(x2) - F1(x1)) / (x2 - x1) )) );
            
            String sx1 = df4.format(x1);
            x1 = Double.parseDouble(sx1);
@@ -94,15 +265,15 @@ public class rootFinder {
            listSecant1[0] = x2;
            listSecant1[1] = x3;
            
-           System.out.println("x1: "+ x1);
-           System.out.println("x2: "+ x2);
-           System.out.println("x3: "+ x3);
+           //System.out.println("x1: "+ x1);
+           //System.out.println("x2: "+ x2);
+           //System.out.println("x3: "+ x3);
            
             
             
                     
         }
-        System.out.println(Arrays.toString(listSecant1));
+        //System.out.println(Arrays.toString(listSecant1));
         
         
         
@@ -112,7 +283,9 @@ public class rootFinder {
     
     
     
-    
+ /////////////////   
+// problem for secant method with NaN trying to fix it ---- should be fixed now
+ ///////////////// 
     
     
     
@@ -129,7 +302,27 @@ public class rootFinder {
             while(x1 != x2)
         
             {
-                double x3 = (F2(x2) / ( (F2(x2) - F2(x1)) / (x2 - x1) ) );
+                
+                                 
+
+                
+                
+                
+                      //Secant method formula
+                     // x1 = xn-z // x2 = xn // x3 = xn+1
+                    //xn+1 = xn - (f(xn)   /[  f(xn)  -  f(xn-1) / xn-xn-1])
+                double x3 = (x2 - (F2(x2) / ( (F2(x2) - F2(x1)) / (x2 - x1) )));
+                
+                                
+                while(Double.isNaN(x3))
+                 { 
+                     
+                     x1 = x1 + 1;
+                     x2 = x2 + 1;
+                     x3 = (x2 - (F2(x2) / ( (F2(x2) - F2(x1)) / (x2 - x1) )));
+                     //System.out.println(x3);
+                           
+                 }
            
                 String sx1 = df4.format(x1);
                 x1 = Double.parseDouble(sx1);
@@ -147,13 +340,13 @@ public class rootFinder {
                 x1 = x2;
                 x2 = x3;
            
-                System.out.println("x1: "+ x1);
-                System.out.println("x2: "+ x2);
-                System.out.println("x3: "+ x3);
+                //System.out.println("x1: "+ x1);
+                //System.out.println("x2: "+ x2);
+                //System.out.println("x3: "+ x3);
                
             }
         
-            System.out.println(Arrays.toString(listSecant2));
+            //System.out.println(Arrays.toString(listSecant2));
         
         }catch(Exception e)
         {
@@ -182,9 +375,10 @@ public class rootFinder {
       
         while(x1 != x2)
         {
-            
-            
-           double x3 = (F3(x2) / ( (F3(x2) - F3(x1)) / (x2 - x1) ) );
+                // secant method formula
+               // x1 = xn-z // x2 = xn // x3 = xn+1
+              //xn+1 = xn - (f(xn)   /[  f(xn)  -  f(xn-1) / xn-xn-1]) 
+           double x3 = (x2 - (F3(x2) / ( (F3(x2) - F3(x1)) / (x2 - x1) )));
            
            String sx1 = df4.format(x1);
            x1 = Double.parseDouble(sx1);
@@ -204,15 +398,15 @@ public class rootFinder {
            x1 = x2;
            x2 = x3;
            
-           System.out.println("x1: "+ x1);
-           System.out.println("x2: "+ x2);
-           System.out.println("x3: "+ x3);
+           //System.out.println("x1: "+ x1);
+           //System.out.println("x2: "+ x2);
+           //System.out.println("x3: "+ x3);
            
             
             
                     
         }
-        System.out.println(Arrays.toString(listSecant3));
+        //System.out.println(Arrays.toString(listSecant3));
         
         
         
@@ -235,7 +429,7 @@ public class rootFinder {
     
  
         //for f(x)=x-x^2  
- static double Bisection1(double a, double b)// the interval
+ static double[] Bisection1(double a, double b)// the interval
  {
      
      double y1 = F1(a);
@@ -245,8 +439,12 @@ public class rootFinder {
      
      
      
-     System.out.println("for x "+a+" first y1: "+y1);
-     System.out.println("for x "+b+" first y2: "+y2);
+     
+     double[] listRoot1 = {a, b};
+     
+     
+     //System.out.println("for x "+a+" first y1: "+y1);
+     //System.out.println("for x "+b+" first y2: "+y2);
      
      if(a < b)
      {
@@ -260,15 +458,20 @@ public class rootFinder {
                  if(y1 != 0)
                  {
                       y1 = F1(a);
-                      a = a + 0.25;
+                      a = a + 0.0001;
+                      String sa2 = df4.format(a);
+                      a = Double.parseDouble(sa2);
+                      
                       String sy1 = df4.format(y1);
                       y1 = Double.parseDouble(sy1);
-                      System.out.println("y1: "+y1);
+                      //System.out.println("y1: "+y1);
                  }
                 
                  if(y1 == 0)
                  {
-                   System.out.println(" y1: "+ y1 + " for a = " + (a -0.25));
+                   //System.out.println(" y1: "+ y1 + " for a = "+a);
+                   listRoot1[0] = a - 0.0001;
+                   
                  }
  
                  
@@ -276,16 +479,20 @@ public class rootFinder {
                  if(y2 != 0)
                  {
                      y2 = F1(b);
-                     b = b - 0.25;
+                     b = b - 0.0001;
+                     String sb2 = df4.format(b);
+                     b = Double.parseDouble(sb2);
+                     
                      String sy2 = df4.format(y2);
                      y2 = Double.parseDouble(sy2);
-                     System.out.println("y2: "+y2);
+                     //System.out.println("y2: "+y2);
                  }
                  
                   
                  if(y2 == 0)
                  {
-                   System.out.println(" y2: "+ y2 + " for b = " + (b +0.25));
+                   //System.out.println(" y2: "+ y2 + " for b = "+b);
+                   listRoot1[1] = b +0.0001;
                  }
                  
                  
@@ -314,30 +521,39 @@ public class rootFinder {
                  if(y1 != 0)
                  {
                       y1 = F1(a);
-                      a = a + 0.25;
+                      a = a + 0.0001;
+                      String sa2 = df4.format(a);
+                      a = Double.parseDouble(sa2);
+                      
                       String sy1 = df4.format(y1);
                       y1 = Double.parseDouble(sy1);
-                      System.out.println("y1: "+y1);
+                      //System.out.println("y1: "+y1);
                  }
                 
                  if(y1 == 0)
                  {
-                   System.out.println(" y1: "+ y1 + " for a = " + (a -0.25));
+                   //System.out.println(" y1: "+ y1 + " for a = "+a);
+                   listRoot1[0] = a -0.0001;
                  }
                  
                  if(y2 != 0)
                  {
                      y2 = F1(b);
-                     b = b - 0.25;
+                     b = b - 0.0001;
+                     String sb2 = df4.format(b);
+                     b = Double.parseDouble(sb2);
+                     
+                     
                      String sy2 = df4.format(y2);
                      y2 = Double.parseDouble(sy2);
-                     System.out.println("y2: "+y2);
+                     //System.out.println("y2: "+y2);
                  }
                  
                   
                  if(y2 == 0)
                  {
-                   System.out.println(" y2: "+ y2 + " for b = " + (b +0.25));
+                   //System.out.println(" y2: "+ y2 + " for b = "+b);
+                   listRoot1[1] = b +0.0001;
                  }
                  
                  
@@ -370,18 +586,399 @@ public class rootFinder {
  
      
 
-     return a-0.25;
+     return listRoot1;
  }   
     
     
     
     
-    
+   
+
+
+
+// for f(x)=ln(x+1)+1
+  static double[] Bisection2(double a, double b)// the interval
+ {
+     
+     double y1 = F2(a);
+     double y2 = F2(b);
+     double aF = a;
+     double bF = b;
+     
+     double[] listRoot2 ={a, b};
+     
+     
+     
+     //System.out.println("for x "+a+" first y1: "+y1);
+     //System.out.println("for x "+b+" first y2: "+y2);
+     
+     if(a < b)
+     {
+         
+         // if f(a)=- and f(b)=+ 
+         if(y1 < 0 || y2 > 0 && y1 > 0 || y2 < 0)
+         {
+             while(y1 != 0 || y2 != 0)
+             {
+                  if(y1 == NEGATIVE_INFINITY)
+                     {
+                         //System.out.println("went by here ");
+                         
+                         while(y1 == NEGATIVE_INFINITY)
+                         {
+                             y1 = F2(a);
+                             a = a + 0.0001;
+                         }
+                     }
+                
+                 if(y1 != 0)
+                 {
+                      y1 = F2(a);
+                      a = a + 0.001;
+                      
+                      String sy1 = df3.format(y1);
+                      y1 = Double.parseDouble(sy1);
+                      //System.out.println("y1: "+y1);
+                 }
+                
+                 if(y1 == 0)
+                 {
+                     
+                     String sa1 = df2.format(a);
+                     a = Double.parseDouble(sa1);
+                     
+                   
+                     //System.out.println(" y1: "+ y1 + " for a = " + a);
+                     listRoot2[0]=a;
+                 }
+ 
+                 
+                 
+                 if(y2 != 0)
+                 {
+                     y2 = F2(b);
+                     b = b - 0.001;
+                     
+                     
+                     
+                     
+                     String sy2 = df2.format(y2);
+                     y2 = Double.parseDouble(sy2);
+                     //System.out.println("y2: "+y2);
+                 }
+                 
+                  
+                 if(y2 == 0)
+                 {
+                     String sb1 = df2.format(b);
+                     b = Double.parseDouble(sb1);
+                   
+                     //System.out.println(" y2: "+ y2 + " for b = " + b);
+                     listRoot2[1]=b;
+                 }
+                 
+                 
+                 if(b <= aF || a >= bF && b <= aF && a >= bF)
+                 {
+                     
+                     System.out.println(" there don't seem to be any root in between the inteval choosen ");
+                     break;
+                 }
+
+                 
+                 
+                 
+                 
+                 
+             }
+               
+         
+         }else if (y1 < 0 || y2 < 0 && y1 > 0 || y2 >0) // if f(a)=- and f(b)=- or f(a)=+ and f(b)=+
+         {
+             
+             //System.out.println(" passing through - - or + + for Ys in bisection2 ");
+             
+             
+              while(y1 != 0 || y2 != 0)
+             {
+                 
+                 if(y1 == NEGATIVE_INFINITY)
+                     {
+                         //System.out.println("went by here ");
+                         
+                         while(y1 == NEGATIVE_INFINITY)
+                         {
+                             y1 = F2(a);
+                             a = a + 0.0001;
+                         }
+                     }
+                 
+                 
+                 
+                 
+                
+                 if(y1 != 0)
+                 {
+                      y1 = F2(a);
+                      a = a + 0.001;
+                      
+                      String sy1 = df3.format(y1);
+                      y1 = Double.parseDouble(sy1);
+                      //System.out.println("y1: "+y1);
+                 }
+                
+                 if(y1 == 0)
+                 {
+                     
+                     String sa1 = df2.format(a);
+                     a = Double.parseDouble(sa1);
+                     
+                   
+                     //System.out.println(" y1: "+ y1 + " for a = " + a);
+                     listRoot2[0]=a;
+                 }
+                 
+                 if(y2 != 0)
+                 {
+                     y2 = F2(b);
+                     b = b - 0.001;
+                     
+                     String sy2 = df3.format(y2);
+                     y2 = Double.parseDouble(sy2);
+                     //System.out.println("y2: "+y2);
+                 }
+                 
+                  
+                 if(y2 == 0)
+                 {
+                     String sb1 = df2.format(b);
+                     b = Double.parseDouble(sb1);
+                     
+                     //System.out.println(" y2: "+ y2 + " for b = " + b);
+                     listRoot2[1]=b;
+                 }
+                 
+                 
+                 if(y2 == NEGATIVE_INFINITY)
+                     {
+                         System.out.println(" i missed the root  ");
+                         
+                     }
+                 
+                 
+                 
+                                                  
+                 if(b <= aF || a >= bF && b <= aF && a >= bF)
+                 {
+                     
+                     System.out.println(" there don't seem to be any root in between the inteval choosen ");
+                     break;
+                 }
+                 
+                
+                 
+                 
+                 
+             }
+             
+         }else {System.out.println("this shouldn't be triggered technically ");}
+         
+         
+         
+     }else 
+     {
+         System.out.println(" the interval entered isn't good you can't go from a higher number to a lower ");
+     }
+     
+     
+     
+     
+ 
+     
+
+     return listRoot2;
+ }          
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+ 
     
     
         
-        
-        
+     
+ // for f(x)=e^x-3x
+  static double[] Bisection3(double a, double b)// the interval
+ {
+     
+     double y1 = F3(a);
+     double y2 = F3(b);
+     double aF = a;
+     double bF = b;
+     
+     double[] listRoot3 ={a, b};
+     
+     
+     
+     //System.out.println("for x "+a+" first y1: "+y1);
+     //System.out.println("for x "+b+" first y2: "+y2);
+     
+     if(a < b)
+     {
+         
+         // if f(a)=- and f(b)=+ 
+         if(y1 < 0 || y2 > 0 && y1 > 0 || y2 < 0)
+         {
+             while(y1 != 0 || y2 != 0)
+             {
+                
+                 if(y1 != 0)
+                 {
+                      y1 = F3(a);
+                      a = a + 0.001;
+                     
+                      
+                      
+                      
+                      String sy1 = df2.format(y1);
+                      y1 = Double.parseDouble(sy1);
+                      //System.out.println("y1: "+y1);
+                 }
+                
+                 if(y1 == 0)
+                 {
+                     String sa1 = df2.format(a);
+                     a = Double.parseDouble(sa1);
+                   
+                     //System.out.println(" y1: "+ y1 + " for a = " + a);
+                     listRoot3[0]=a;
+                 }
+ 
+                 
+                 
+                 if(y2 != 0)
+                 {
+                     y2 = F3(b);
+                     b = b - 0.001;
+                     
+                     
+                     
+                     
+                     String sy2 = df2.format(y2);
+                     y2 = Double.parseDouble(sy2);
+                     //System.out.println("y2: "+y2);
+                 }
+                 
+                  
+                 if(y2 == 0)
+                 {
+                     String sb1 = df2.format(b);
+                     b = Double.parseDouble(sb1);
+                   
+                     //System.out.println(" y2: "+ y2 + " for b = " + b);
+                     listRoot3[1]=b;
+                 }
+                 
+                 
+                 if(b <= aF || a >= bF && b <= aF && a >= bF)
+                 {
+                     
+                     System.out.println(" there don't seem to be any root in between the inteval choosen ");
+                     break;
+                 }
+
+                 
+                 
+                 
+                 
+                 
+             }
+               
+         
+         }else if (y1 < 0 || y2 < 0 && y1 > 0 || y2 >0) // if f(a)=- and f(b)=- or f(a)=+ and f(b)=+
+         {
+             
+             //System.out.println(" passing through - - or + + for Ys in bisection3 ");
+             
+             
+              while(y1 != 0 || y2 != 0)
+             {
+                
+                 if(y1 != 0)
+                 {
+                      y1 = F3(a);
+                      a = a + 0.25;
+                      
+                      String sy1 = df4.format(y1);
+                      y1 = Double.parseDouble(sy1);
+                      //System.out.println("y1: "+y1);
+                 }
+                
+                 if(y1 == 0)
+                 {
+                   //System.out.println(" y1: "+ y1 + " for a = " + (a -0.25));
+                   listRoot3[0]=a;
+                 }
+                 
+                 if(y2 != 0)
+                 {
+                     y2 = F3(b);
+                     b = b - 0.25;
+                     String sy2 = df4.format(y2);
+                     y2 = Double.parseDouble(sy2);
+                     //System.out.println("y2: "+y2);
+                 }
+                 
+                  
+                 if(y2 == 0)
+                 {
+                   //System.out.println(" y2: "+ y2 + " for b = " + (b +0.25));
+                   listRoot3[0]=a;
+                 }
+                 
+                 
+                                                  
+                 if(b <= aF || a >= bF && b <= aF && a >= bF)
+                 {
+                     
+                     System.out.println(" there don't seem to be any root in between the inteval choosen ");
+                     break;
+                 }
+                 
+                
+                 
+                 
+                 
+             }
+             
+         }else {System.out.println("this shouldn't be triggered technically ");}
+         
+         
+         
+     }else 
+     {
+         System.out.println(" the interval entered isn't good you can't go from a higher number to a lower ");
+     }
+     
+     
+     
+     
+ 
+     
+
+     return listRoot3;
+ }         
         
         
         
@@ -414,7 +1011,7 @@ public class rootFinder {
         
         
     //I did it myyyyyy wwwaaayyy 
-    // way to find root for square function
+    // way to find root for square function and nothing else
     static double MyWay(double a, double b, double c)
     {
         //f(x)=x-x2
@@ -472,10 +1069,12 @@ public class rootFinder {
     
     private static DecimalFormat df1 = new DecimalFormat("#.#");
     private static DecimalFormat df2 = new DecimalFormat("#.##");
+    private static DecimalFormat df3 = new DecimalFormat("#.###");
     private static DecimalFormat df4 = new DecimalFormat("#.####");
    
 
 
+    /// should be able to find any root for those three function 
     static LinkedList<Double> MyWay2(double a, double b, int c)
     {
        LinkedList<Double> roots1 = new LinkedList<Double>();
@@ -550,15 +1149,21 @@ public class rootFinder {
            {
                double answer1 = F3(a);
                
-               System.out.println("answer1: "+answer1);
+               String Sanswer1 = df3.format(answer1);
+               answer1 = Double.parseDouble(Sanswer1);
+               //System.out.println("answer1: "+answer1);
                
+               a = a + 0.001;
+               
+               String Sa = df3.format(a);
+               a = Double.parseDouble(Sa);
                
                if(answer1 == 0)
                {
                    roots1.add(a);
                }
                
-               a = a + 0.25;
+               
            }
      
        
