@@ -19,25 +19,19 @@ import java.text.DecimalFormat;
 public class Functions 
 {
     
-    
     public static void main( String[] args)
     {
     
-    Scanner scan = new Scanner(System.in);
-    System.out.println("enter x:");
-    
-    
-    int x1 = scan.nextInt();
-    double x = int2double(x1);
-    //System.out.println(F1(x));
-    //System.out.println(F2((int) x));
-    //System.out.println(F3(x));
-    
-    
-    
-    
+        Scanner scan = new Scanner(System.in);
+        System.out.println("enter x:");
+   
+        int x1 = scan.nextInt();
+        double x = int2double(x1);
+        //System.out.println(F1(x));
+        //System.out.println(F2((int) x));
+        //System.out.println(F3(x));
+ 
     }
-    
 
     /// x-x^2
     static double F1( double a)
@@ -59,7 +53,6 @@ public class Functions
         
     }
     
-    
     /// ln(x+1)+1
     static double F2(double a)
     {
@@ -69,6 +62,7 @@ public class Functions
         return a;
         
     }
+    
     // derivative of F2 f'(x) = 1 / x + 1
     static double F2derive(double a)
     {
@@ -94,8 +88,7 @@ public class Functions
         a = expo(a) - 3;
         return a;
         
-    }
-    
+    }   
     
     static double int2double(int a)
     {
@@ -105,8 +98,6 @@ public class Functions
         
     }
     
-
-    
     static double power(double a, double b )
     {
         
@@ -115,8 +106,6 @@ public class Functions
         return a;
         
     }
-    
-   
 
     static double ln(double a) 
     {
@@ -127,7 +116,6 @@ public class Functions
     
     }
     
-
     static double expo(double i)
     {
     
