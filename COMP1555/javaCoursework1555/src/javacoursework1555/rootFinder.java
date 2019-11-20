@@ -32,7 +32,7 @@ public class rootFinder {
     {
         //Newton Raphson method
         
-        //System.out.println(NR1(1, 2));
+        System.out.println(NR1(-2, 2));
         //System.out.println(NR2(1, 2));
         //System.out.println(NR3(1, 2));
     
@@ -92,7 +92,8 @@ static double NR1(double x1, double x4)
             
             if(x2 == x1)
             {
-                //System.out.println("root: "+ x2);
+                System.out.println("root: "+ x2);
+                System.out.print(results1);
                 return x2;
                 //exit = true;
             }
@@ -105,7 +106,7 @@ static double NR1(double x1, double x4)
         
         
         
-        //System.out.print(results1);
+        System.out.print(results1);
         
         
     }else

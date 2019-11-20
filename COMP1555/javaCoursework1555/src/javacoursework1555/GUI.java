@@ -30,6 +30,8 @@ import static javacoursework1555.rootFinder.Secant1;
 import static javacoursework1555.rootFinder.Secant2;
 import static javacoursework1555.rootFinder.Secant3;
 import static javacoursework1555.subMenu.step1;
+import java.awt.Graphics;
+import static javacoursework1555.graphic.*;
 
 //import javacoursework1555.Plot2d;
 
@@ -40,7 +42,7 @@ import static javacoursework1555.subMenu.step1;
  * @author barnabe
  */
 public class GUI extends javax.swing.JFrame {
-
+    public static ArrayList<ArrayList<Double>> XYlist = new ArrayList<ArrayList<Double>>();
     /** Creates new form GUI */
     public GUI() {
         initComponents();
@@ -55,6 +57,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel4.setVisible(false);
         jPanel5.setVisible(false);
         
+        jButton15.setVisible(false);
         
         jTextField3.setEditable(false);
         jTextField4.setEditable(false);
@@ -82,7 +85,9 @@ public class GUI extends javax.swing.JFrame {
 
     ArrayList<Double> Temp = new ArrayList<Double>();
     
+    
     ArrayList<ArrayList<Double>> XY = new ArrayList<ArrayList<Double>>();
+    
    
     ArrayList<Double> X = new ArrayList<Double>();
 //    double [] X1;
@@ -101,6 +106,8 @@ public class GUI extends javax.swing.JFrame {
     int[] FunctionChoosen = {0};
     
     
+     
+ 
     
     
     /** This method is called from within the constructor to
@@ -145,6 +152,7 @@ public class GUI extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("frame0");
@@ -484,6 +492,13 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton15.setText("see graph");
+        jButton15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton15ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -507,8 +522,13 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(171, 171, 171))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton15)
+                        .addGap(154, 154, 154))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,7 +549,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addComponent(jButton15)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -655,6 +677,7 @@ public class GUI extends javax.swing.JFrame {
         step1( k, k1, k2);  
         //System.out.println("print of step1() in GUI for f(x)=x-x^2   "+step1( k, k1, k2));
         XY = (step1(k, k1, k2));
+        XYlist = XY;
         //System.out.println("print of XY list in GUI wich should be similar to step1() button selected f(x)=x-x^2  "+XY);
         X = XY.get(0);
         System.out.println("print of X list which should be similar to step1() first part button selected f(x)=x-x^2   "+X);
@@ -692,6 +715,7 @@ public class GUI extends javax.swing.JFrame {
       step1( k, k1, k2);
       //System.out.println("print of step1() in GUI for f(x)=ln(x+1)+1   "+ step1( k, k1, k2));
       XY = (step1(k, k1, k2));
+      XYlist = XY;
       //System.out.println("print of XY list in GUI wich should be similar to step1() button selected f(x)=ln(x+1)+1  "+XY);
       X = XY.get(0);
       System.out.println("print of X list which should be similar to step1() first part button selected f(x)=ln(x+1)+1   "+ X);
@@ -781,6 +805,7 @@ public class GUI extends javax.swing.JFrame {
         step1( k, k1, k2);
         //System.out.println("print of step1() in GUI for f(x)=e^x-3x   "+ step1( k, k1, k2));
         XY = (step1(k, k1, k2));
+        XYlist = XY;
         //System.out.println("print of XY list in GUI wich should be similar to step1() button selected f(x)=e^x-3  "+XY);
         X = XY.get(0);
         System.out.println("print of X list which should be similar to step1() first part button selected f(x)=e^x-3   "+ X);
@@ -1079,6 +1104,8 @@ public class GUI extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
         
+        jButton15.setVisible(true);
+        
         if(FunctionChoosen[0] == 1)
         {
             double root1 = NR1(Temp.get(0), Temp.get(1));
@@ -1106,6 +1133,8 @@ public class GUI extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
         
+        jButton15.setVisible(true);
+        
         if(FunctionChoosen[0] == 1)
         {
             double root1 = Secant1(Temp.get(0), Temp.get(1));
@@ -1131,6 +1160,8 @@ public class GUI extends javax.swing.JFrame {
     //BISECTION
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
+        
+        jButton15.setVisible(true);
         
         if(FunctionChoosen[0] == 1)
         {
@@ -1158,6 +1189,8 @@ public class GUI extends javax.swing.JFrame {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
         
+        jButton15.setVisible(true);
+        
         if(FunctionChoosen[0] == 1)
         {    // would zork but don't use linked likst qnd work only for square function
             //double root1 = MyWay(-1, 1, 0);
@@ -1180,6 +1213,29 @@ public class GUI extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton14ActionPerformed
+
+    
+    
+    
+    
+    
+/////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    //show graph part
+    
+    
+    
+ ////////////////////////////////////////////////////////////////////////////////
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        // TODO add your handling code here:
+        
+        System.out.println(XYlist);
+        graphic.main();
+        
+    }//GEN-LAST:event_jButton15ActionPerformed
 
     
     
@@ -1250,6 +1306,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1546,6 +1603,8 @@ public class GUI extends javax.swing.JFrame {
 //    
 //    
 //    }
+
+
 
     
     
